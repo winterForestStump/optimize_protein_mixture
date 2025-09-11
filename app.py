@@ -131,9 +131,9 @@ def optimize_protein_mixture_multi(products_data, min_protein, mixture_price=Non
                     st.write(f"  {products_data[i]['name']}: {optimal_shares[i]*100:.2f}%")
                     cost_contribution = products_data[i]['price_per_kg'] * optimal_shares[i]
                     st.write(f"  {products_data[i]['name']}: РУБ {cost_contribution:.2f}")
+            st.write(f"Общая стоимость смеси за тонну: РУБ {optimal_cost:.2f}")
         
         with st.container(border=True):
-            st.write(f"Общая стоимость смеси за тонну: РУБ {optimal_cost:.2f}")
             st.write(f"Полученная концентрация протеина: {protein_concentration:.2f}%")
             st.write(f"Минимальная концентрация протеина: {min_protein:.2f}%")
             st.write(f"Требование соблюдено: {protein_concentration >= min_protein}")
