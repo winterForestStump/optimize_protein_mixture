@@ -1,2 +1,2 @@
 # optimize_protein_mixture
-Optimize protein mixture to minimize cost while meeting protein requirements
+This Streamlit application optimizes protein mixtures using linear programming to minimize cost while meeting protein concentration requirements.
