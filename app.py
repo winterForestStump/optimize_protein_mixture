@@ -4,45 +4,40 @@ from scipy.optimize import linprog
 import matplotlib.pyplot as plt
 
 st.header("Исходные продукты")
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4 = st.columns(4, border=True)
 with col1:
     product_1 = st.text_input("Название продукта", "Соя", key="product_1")
     protein_conc_1 = st.number_input("Содержание протеина в продукте", key="protein_conc_1", min_value = 0, max_value=100)
     protein_price_1 = st.number_input("Стоимость продукта, руб за тонну", key="protein_price_1", min_value = 0.00, step = 1.00)
-
 with col2:
     product_2 = st.text_input("Название продукта", "Горох", key="product_2")
     protein_conc_2 = st.number_input("Содержание протеина в продукте", key="protein_conc_2", min_value = 0, max_value=100)
     protein_price_2 = st.number_input("Стоимость продукта, руб за тонну", key="protein_price_2", min_value = 0.00, step = 1.00)
-
 with col3:
     product_3 = st.text_input("Название продукта", key="product_3")
     protein_conc_3 = st.number_input("Содержание протеина в продукте", key="protein_conc_3", min_value = 0, max_value=100)
     protein_price_3 = st.number_input("Стоимость продукта, руб за тонну", key="protein_price_3", min_value = 0.00, step = 1.00)
-
 with col4:
     product_4 = st.text_input("Название продукта", key="product_4")
     protein_conc_4 = st.number_input("Содержание протеина в продукте", key="protein_conc_4", min_value = 0, max_value=100)
     protein_price_4 = st.number_input("Стоимость продукта, руб за тонну", key="protein_price_4", min_value = 0.00, step = 1.00)
 
+with st.container(border=True):
+    st.header("Добавление карбамида")
+    use_urea = st.checkbox("Использовать карбамид", value=False)
+    if use_urea:
+        urea_percentage = st.slider("Добавление карбамида, % от массы смеси", 
+                                min_value=0.0, max_value=3.0, value=1.0, step=0.1)
+        urea_price = st.number_input("Стоимость карбамида, руб за тонну", 
+                                    min_value=0.00, value=10000.00, step=1.00)
+    else:
+        urea_percentage = 0.0
+        urea_price = 0.0
 
-st.header("Добавление карбамида")
-use_urea = st.checkbox("Использовать карбамид", value=False)
-if use_urea:
-    urea_percentage = st.slider("Добавление карбамида, % от массы смеси", 
-                               min_value=0.0, max_value=3.0, value=1.0, step=0.1)
-    urea_price = st.number_input("Стоимость карбамида, руб за тонну", 
-                                min_value=0.00, value=10000.00, step=1.00)
-else:
-    urea_percentage = 0.0
-    urea_price = 0.0
-
-
-st.header("Концентрация протеина в конечном продукте")
-min_protein = st.number_input("Введите минимальное содержание протеина в конечной смеси, %", key="min_protein", min_value = 0, max_value=100)
-
-st.header("Цена реализации конечного продукта")
-mixture_price_input = st.number_input("Введите цену реализации конечной смеси, руб за тонну", key="mixture_price_input", min_value = 0.00, step = 1.00)
+with st.container(border=True):
+    st.header("Данные конечного продукта")
+    min_protein = st.number_input("Введите минимальное содержание протеина в конечной смеси, %", key="min_protein", min_value = 0, max_value=100)
+    mixture_price_input = st.number_input("Введите цену реализации конечной смеси, руб за тонну", key="mixture_price_input", min_value = 0.00, step = 1.00)
 
 products_data = []
 if product_1 and protein_conc_1 > 0 and protein_price_1 > 0:
