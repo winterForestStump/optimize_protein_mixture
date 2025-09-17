@@ -172,8 +172,10 @@ def optimize_protein_mixture_max_profit(products_data, min_protein, mixture_pric
     # Check if problem is feasible
     max_protein = max(product['protein_concentration'] for product in products_data)
     if max_protein * agri_share < effective_min_protein:
+        st.error("НЕВЫПОЛНИМАЯ ЗАДАЧА!")
+        st.error(f"Максимальная доступная концентрация протеина ({max_protein * agri_share:.2f}%) меньше требуемой ({effective_min_protein:.2f}%)")
         return None
-
+    
     solutions = []
     
     # MAX PROFIT GOAL
